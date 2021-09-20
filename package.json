@@ -1,0 +1,23 @@
+{
+  "name": "nba-api-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucastagliani/nba-api-nodejs.git"
+  },
+  "author": "Lucas Tagliani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucastagliani/nba-api-nodejs/issues"
+  },
+  "homepage": "https://github.com/lucastagliani/nba-api-nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
