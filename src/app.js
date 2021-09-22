@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const staticTeams = require('./api/teams/static-data/teams.json')
 
