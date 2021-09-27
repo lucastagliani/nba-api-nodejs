@@ -1,6 +1,6 @@
 {
   "api": {
-    "status": 200,
+    "status": 201,
     "message": "GET teams/league/sacramento",
     "results": 34,
     "filters": [

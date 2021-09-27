@@ -1,22 +1,19 @@
-const axios = require("axios").default;
+import axios from 'axios'
 
-const getTeams = () => {
+export const getTeams = async () => {
   var options = {
     method: 'GET',
-    url: 'https://api-nba-v1.p.rapidapi.com/leagues/sacramento',
+    url: 'https://api-nba-v1.p.rapidapi.com/teams/league/sacramento',
     headers: {
       'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
       'x-rapidapi-key': process.env.RAPIDAPI_NBA_API_KEY
     }
   };
 
-  axios.request(options).then(function (response) {
-    console.log(response.data);
-  }).catch(function (error) {
-    console.error(error);
-  });
+  const response = await axios.request(options)
+  return response.data
 }
 
-module.exports = {
-  getTeams
-}
+// module.exports = {
+//   getTeams
+// }

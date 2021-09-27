@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
-    "start": "node src/app.js"
+    "start": "node --experimental-json-modules src/app.js"
   },
   "repository": {
     "type": "git",
