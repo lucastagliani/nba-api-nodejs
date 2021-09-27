@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const staticTeams = require('./api/teams/static-data/teams.json')
+const {getTeams} = require('./api/teams/service.js')
 
 const app = express()
 const port = 8080
