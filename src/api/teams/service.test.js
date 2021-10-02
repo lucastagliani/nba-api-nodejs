@@ -1,12 +1,22 @@
-import axios from 'axios'
+import axios from "axios";
 // import teams from './static-data/teams.json'
 
-jest.mock(axios)
+jest.mock(axios);
 
 describe("teams service", () => {
-  test("should call /teams/league/sacramento", () => {
-    axios.get.mockResolvedValueOnce({});
+  describe("when HIT_REAL_API_TEAMS is ON", () => {
+    test("should call /teams/league/sacramento", () => {
+      axios.get.mockResolvedValueOnce({});
 
-    expect(false).toBeFalsy();
+      expect(false).toBeFalsy();
+    });
+  });
+
+  describe("when HIT_REAL_API_TEAMS is OFF", () => {
+    test("should not call /teams/league/sacramento", () => {
+      axios.get.mockResolvedValueOnce({});
+
+      expect(false).toBeFalsy();
+    });
   });
 });

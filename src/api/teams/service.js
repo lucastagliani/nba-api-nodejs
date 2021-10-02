@@ -1,6 +1,12 @@
 import axios from 'axios'
+import staticTeams from './static-data/teams.json'
+import {features} from '../../constants.js'
 
 export const getTeams = async () => {
+  if (!features.HIT_REAL_API_TEAMS) {
+    return staticTeams
+  }
+
   var options = {
     method: 'GET',
     url: 'https://api-nba-v1.p.rapidapi.com/teams/league/sacramento',
@@ -11,9 +17,8 @@ export const getTeams = async () => {
   };
 
   const response = await axios.request(options)
+  if (!response?.data) {
+    return {}
+  }
   return response.data
 }
-
-// module.exports = {
-//   getTeams
-// }
