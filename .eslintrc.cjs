@@ -11,7 +11,9 @@ module.exports = {
   },
   rules: {
     semi: ['error', 'never'],
-    "import/prefer-default-export": "off",
+    'import/prefer-default-export': 'off',
+    "import/extensions": ["warn", "ignorePackages"]
+    
   },
   ignorePatterns: ['jest.config.js'],
 }
