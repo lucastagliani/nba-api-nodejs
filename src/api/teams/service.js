@@ -1,10 +1,10 @@
-import axios from 'axios';
-import staticTeams from './static-data/teams.json';
-import { features } from '../../constants.js';
+import axios from 'axios'
+import staticTeams from './static-data/teams.json'
+import { features } from '../../constants'
 
 export const getTeams = async () => {
   if (!features.HIT_REAL_API_TEAMS) {
-    return staticTeams;
+    return staticTeams
   }
 
   const options = {
@@ -14,11 +14,11 @@ export const getTeams = async () => {
       'x-rapidapi-host': 'api-nba-v1.p.rapidapi.com',
       'x-rapidapi-key': process.env.RAPIDAPI_NBA_API_KEY,
     },
-  };
-
-  const response = await axios.request(options);
-  if (!response?.data) {
-    return {};
   }
-  return response.data;
-};
+
+  const response = await axios.request(options)
+  if (!response?.data) {
+    return {}
+  }
+  return response.data
+}
