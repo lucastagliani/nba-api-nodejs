@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 
 import express from 'express'
-// const express = require('express')
+import { cache } from './cache.js'
 import { getTeams } from './api/teams/service.js'
 
 dotenv.config()
@@ -13,9 +13,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/teams', async (req, res) => {
+app.get('/teams', cache(), async (req, res) => {
   const teams = await getTeams()
-  res.send(teams)
+  res.json(teams)
 })
 
 app.listen(port, () => {

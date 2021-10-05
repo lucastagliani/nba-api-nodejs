@@ -1,5 +1,5 @@
 const features = {
-  HIT_REAL_API_TEAMS: true,
+  HIT_REAL_API_TEAMS: false,
 }
 
 export {
