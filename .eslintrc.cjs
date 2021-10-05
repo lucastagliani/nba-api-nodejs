@@ -12,8 +12,17 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     'import/prefer-default-export': 'off',
-    "import/extensions": ["warn", "ignorePackages"]
-    
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'ignorePackages',
+        jsx: 'ignorePackages',
+        ts: 'ignorePackages',
+        tsx: 'ignorePackages',
+      },
+    ],
+
   },
   ignorePatterns: ['jest.config.js'],
 }
