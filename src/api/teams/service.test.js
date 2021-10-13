@@ -1,8 +1,6 @@
 import axios from 'axios'
 import constants from '../../constants.js'
 import staticTeams from './static-data/teams.json'
-// import * as constants from '../../constants.js'
-
 import { getTeams } from './service.js'
 
 jest.mock('axios')
@@ -20,10 +18,10 @@ describe('teams service', () => {
   }
 
   describe('when HIT_REAL_API_TEAMS is ON', () => {
+    beforeEach(() => {
+      jest.spyOn(constants, 'features', 'get').mockReturnValue({ HIT_REAL_API_TEAMS: true })
+    })
     it('should call /teams/league/sacramento', async () => {
-      const mySpy = jest.spyOn(constants, 'features', 'get')
-      mySpy.mockReturnValue({ HIT_REAL_API_TEAMS: true })
-
       axios.request.mockImplementation(() => Promise.resolve({ data: staticTeams }))
       const result = await getTeams()
       expect(axios.request).toHaveBeenCalledTimes(1)
@@ -32,10 +30,10 @@ describe('teams service', () => {
   })
 
   describe('when HIT_REAL_API_TEAMS is OFF', () => {
+    beforeEach(() => {
+      jest.spyOn(constants, 'features', 'get').mockReturnValue({ HIT_REAL_API_TEAMS: false })
+    })
     it('should not call /teams/league/sacramento', async () => {
-      const mySpy = jest.spyOn(constants, 'features', 'get')
-      mySpy.mockReturnValue({ HIT_REAL_API_TEAMS: false })
-
       const result = await getTeams()
       expect(axios.request).not.toHaveBeenCalled()
       expect(result).toMatchObject(expectedData)
