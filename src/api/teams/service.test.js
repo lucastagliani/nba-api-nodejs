@@ -11,7 +11,7 @@ jest.mock('../../constants.js', () => ({
 }))
 
 describe('teams service', () => {
-  const expectedData = {
+  const expectedResponseData = {
     api: {
       filters: expect.any(Array), message: 'GET teams/league/sacramento', results: 34, status: 200, teams: expect.any(Array),
     },
@@ -23,9 +23,18 @@ describe('teams service', () => {
     })
     it('should call /teams/league/sacramento', async () => {
       axios.request.mockImplementation(() => Promise.resolve({ data: staticTeams }))
-      const result = await getTeams()
+      await getTeams()
       expect(axios.request).toHaveBeenCalledTimes(1)
-      expect(result).toMatchObject(expectedData)
+    })
+    it('should return response data with teams prop when fetch is successful', async () => {
+      axios.request.mockImplementation(() => Promise.resolve({ data: staticTeams }))
+      const result = await getTeams()
+      expect(result).toMatchObject(expectedResponseData)
+    })
+    xit('should NOT return response data with teams prop when fetch is NOT successful', async () => {
+      axios.request.mockImplementation(() => Promise.reject(new Error()))
+      const result = await getTeams()
+      expect(result).toMatchObject({})
     })
   })
 
@@ -36,7 +45,7 @@ describe('teams service', () => {
     it('should not call /teams/league/sacramento', async () => {
       const result = await getTeams()
       expect(axios.request).not.toHaveBeenCalled()
-      expect(result).toMatchObject(expectedData)
+      expect(result).toMatchObject(expectedResponseData)
     })
   })
 
