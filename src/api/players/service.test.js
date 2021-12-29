@@ -6,6 +6,7 @@ describe('players service', () => {
       personId: 2544,
       lastName: 'James',
       firstName: 'LeBron',
+      fullName: 'LeBron James',
       playerSlug: 'lebron-james',
       teamId: 1610612747,
       teamSlug: 'lakers',
@@ -29,6 +30,7 @@ describe('players service', () => {
       statusTimeframe: 'Season',
       fromYear: '2003',
       toYear: '2021',
+      isActive: true,
       imageLinks: {
         small: 'https://cdn.nba.com/headshots/nba/latest/260x190/2544.png',
         large: 'https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png',
@@ -36,8 +38,35 @@ describe('players service', () => {
     },
   ]
 
-  it('should match object contract', () => {
+  it('should get all players', () => {
     const actualPlayers = getPlayers()
     expect(actualPlayers).toEqual(expect.arrayContaining(expectedPlayersFormat))
+    expect(actualPlayers.length).toEqual(4713)
+  })
+
+  it('should filter active players', () => {
+    const actualPlayers = getPlayers({ isActive: true })
+    expect(actualPlayers.length).toEqual(583)
+  })
+
+  it('should filter players by name that exists in fullName considering case insensitive', () => {
+    const actualPlayers = getPlayers({ name: 'lebron' })
+    expect(actualPlayers).toEqual(expect.arrayContaining(expectedPlayersFormat))
+    expect(actualPlayers.length).toEqual(1)
+  })
+
+  it('should filter players by minimum points', () => {
+    const actualPlayers = getPlayers({ minPoints: 10 })
+    expect(actualPlayers.length).toEqual(851)
+  })
+
+  it('should filter players by minimum rebounds', () => {
+    const actualPlayers = getPlayers({ minRebounds: 8 })
+    expect(actualPlayers.length).toEqual(174)
+  })
+
+  it('should filter players by assists assists', () => {
+    const actualPlayers = getPlayers({ minAssists: 6 })
+    expect(actualPlayers.length).toEqual(78)
   })
 })
