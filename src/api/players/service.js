@@ -2,8 +2,10 @@
 import playersOriginalDataSet from './static-data/playerindex-original-data.json'
 
 const getMappedPlayers = () => {
-  const highestYear = playersOriginalDataSet.resultSets[0].rowSet.reduce((acc, row) => acc = acc > parseInt(row[25]) ? acc : parseInt(row[25]), 0)
-  return playersOriginalDataSet.resultSets[0].rowSet
+  const { rowSet } = playersOriginalDataSet.resultSets[0]
+  const highestYear = rowSet
+    .reduce((acc, row) => (acc > parseInt(row[25], 10) ? acc : parseInt(row[25], 10)), 0)
+  return rowSet
     .map((player) => ({
       personId: player[0],
       lastName: player[1],
