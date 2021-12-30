@@ -43,7 +43,7 @@ const getMappedPlayers = () => {
 }
 
 const getFilteredPlayers = (players, {
-  name, minPoints, minRebounds, minAssists, isActive,
+  name, minPoints, minRebounds, minAssists, isActive, minPointsReboundsOrAssists,
 }) => {
   let filteredPlayers = players
   if (isActive) {
@@ -53,6 +53,12 @@ const getFilteredPlayers = (players, {
   if (name) {
     const nameInLowerCase = name.toLowerCase()
     filteredPlayers = filteredPlayers.filter((player) => player.fullName.toLowerCase().includes(nameInLowerCase))
+  }
+
+  if (minPointsReboundsOrAssists) {
+    filteredPlayers = filteredPlayers.filter((player) => player.points >= minPointsReboundsOrAssists
+      || player.rebounds >= minPointsReboundsOrAssists
+      || player.assists >= minPointsReboundsOrAssists)
   }
 
   if (minPoints) {

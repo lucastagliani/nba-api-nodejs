@@ -65,8 +65,13 @@ describe('players service', () => {
     expect(actualPlayers.length).toEqual(174)
   })
 
-  it('should filter players by assists assists', () => {
+  it('should filter players by minimum assists', () => {
     const actualPlayers = getPlayers({ minAssists: 6 })
     expect(actualPlayers.length).toEqual(78)
+  })
+
+  it('should filter active players by minimum value on at least one stat', () => {
+    const actualPlayers = getPlayers({ isActive: true, minPointsReboundsOrAssists: 10 })
+    expect(actualPlayers.length).toEqual(186)
   })
 })
