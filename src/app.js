@@ -3,6 +3,7 @@ import express from 'express'
 import { cache } from './cache.js'
 import { getTeams } from './api/teams/service.js'
 import { getPlayers } from './api/players/service.js'
+import { getQuestion } from './api/questions/question-service.js'
 
 dotenv.config()
 
@@ -18,9 +19,15 @@ app.get('/teams', cache(), async (req, res) => {
   res.json(teams)
 })
 
-app.get('/players', async (req, res) => {
-  const players = await getPlayers()
+app.get('/players', (req, res) => {
+  const filters = req.query
+  const players = getPlayers(filters)
   res.json(players)
+})
+
+app.get('/questions', (req, res) => {
+  const question = getQuestion()
+  res.json(question)
 })
 
 app.listen(port, () => {
