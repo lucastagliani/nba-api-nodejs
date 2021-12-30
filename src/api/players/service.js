@@ -46,8 +46,9 @@ const getFilteredPlayers = (players, {
   name, minPoints, minRebounds, minAssists, isActive, minPointsReboundsOrAssists,
 }) => {
   let filteredPlayers = players
+
   if (isActive) {
-    filteredPlayers = filteredPlayers.filter((player) => player.isActive === isActive)
+    filteredPlayers = filteredPlayers.filter((player) => player.isActive === !!isActive)
   }
 
   if (name) {
