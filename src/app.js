@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import { cache } from './cache.js'
-import { getTeams } from './api/teams/service.js'
-import { getPlayers } from './api/players/service.js'
+import { getTeams } from './api/teams/team-service.js'
+import { getPlayers } from './api/players/player-service.js'
 import { getQuestion } from './api/questions/question-service.js'
 
 dotenv.config()

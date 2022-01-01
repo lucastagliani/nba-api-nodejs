@@ -1,7 +1,7 @@
 import axios from 'axios'
 import constants from '../../constants.js'
 import staticTeams from './static-data/teams.json'
-import { getTeams } from './service.js'
+import { getTeams } from './team-service'
 
 jest.mock('axios')
 jest.mock('../../constants.js', () => ({

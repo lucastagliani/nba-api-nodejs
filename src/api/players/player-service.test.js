@@ -1,4 +1,4 @@
-import { getPlayers } from './service.js'
+import { getPlayers } from './player-service.js'
 
 describe('players service', () => {
   const expectedPlayersFormat = [
