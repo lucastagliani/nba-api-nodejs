@@ -1,22 +1,25 @@
 import { getPlayers } from '../players/player-service.js'
 
-export const getQuestion = () => {
-  // buscar os players - filtrar por mais conhecidos - como filtrar isso?
-  const players = getPlayers({ isActive: true, minPointsReboundsOrAssists: 15 })
-  // pegar 4 randomicos - como ser randomico?
-  const alternativePlayers = players
+const getRandomPlayers = (players) => {
+  const ALTERNATIVE_QUESTION_QUANTITY = 4
+  return players
     .map((a) => ({ sort: Math.random(), value: a }))
     .sort((a, b) => a.sort - b.sort)
     .map((a) => a.value)
-    .slice(0, 4)
+    .slice(0, ALTERNATIVE_QUESTION_QUANTITY)
+}
 
-  // escolher 1 entre os randomicos - como?
-  const randomIndex = Math.floor(Math.random() * alternativePlayers.length)
-  const correctAnswerPlayer = alternativePlayers[randomIndex]
+const defineCorrectPlayerRandomly = (players) => {
+  const randomIndex = Math.floor(Math.random() * players.length)
+  return players[randomIndex]
+}
+export const getQuestion = () => {
+  const players = getPlayers({ isActive: true, minPointsReboundsOrAssists: 15 })
 
-  // dos 4 jogadores, colocar os id e nome na questão
-  // do 1 jogador escolhido, preencher correctAnswerKey com a key
-  // do 1 jogador escolhido, definir a imagem
+  const alternativePlayers = getRandomPlayers(players)
+
+  const correctAnswerPlayer = defineCorrectPlayerRandomly(alternativePlayers)
+
   const alternativeKeyValues = alternativePlayers
     .map((player) => ({ key: player.personId, value: player.fullName }))
 
