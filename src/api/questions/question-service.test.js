@@ -16,4 +16,14 @@ describe('question-service', () => {
     const actualQuestion = getQuestion()
     expect(actualQuestion).toEqual(expectedQuestion)
   })
+
+  it('should have 4 alternatives to choose', () => {
+    const actualQuestion = getQuestion()
+    expect(actualQuestion.alternativeOptions.length).toEqual(4)
+  })
+
+  // it('should have correct answer key in one of the alternatives', () => {
+  //   const actualQuestion = getQuestion()
+  //   expect(actualQuestion.alternativeOptions).
+  // })
 })
