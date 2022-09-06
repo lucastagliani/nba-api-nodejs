@@ -9,24 +9,25 @@ const getRandomPlayers = (players) => {
     .slice(0, ALTERNATIVE_QUESTION_QUANTITY)
 }
 
-const defineCorrectPlayerRandomly = (players) => {
+const defineRightAnswerRandomly = (players) => {
   const randomIndex = Math.floor(Math.random() * players.length)
   return players[randomIndex]
 }
+
 export const getQuestion = () => {
   const players = getPlayers({ isActive: true, minPointsReboundsOrAssists: 15 })
 
   const alternativePlayers = getRandomPlayers(players)
 
-  const correctAnswerPlayer = defineCorrectPlayerRandomly(alternativePlayers)
+  const rightAnswerPlayer = defineRightAnswerRandomly(alternativePlayers)
 
   const alternativeKeyValues = alternativePlayers
     .map((player) => ({ key: player.personId, value: player.fullName }))
 
   return ({
     sentence: 'Which basketball player is this?',
-    correctAnswerKey: correctAnswerPlayer.personId,
-    image: correctAnswerPlayer.imageLinks.large,
+    correctAnswerKey: rightAnswerPlayer.personId,
+    image: rightAnswerPlayer.imageLinks.large,
     alternativeOptions: alternativeKeyValues,
   })
 }
