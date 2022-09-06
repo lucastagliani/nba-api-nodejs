@@ -15,9 +15,9 @@ const defineRightAnswerRandomly = (players) => {
 }
 
 export const getQuestion = () => {
-  const players = getPlayers({ isActive: true, minPointsReboundsOrAssists: 15 })
+  const eligiblePlayers = getPlayers({ isActive: true, minPointsReboundsOrAssists: 15 })
 
-  const alternativePlayers = getRandomPlayers(players)
+  const alternativePlayers = getRandomPlayers(eligiblePlayers)
 
   const rightAnswerPlayer = defineRightAnswerRandomly(alternativePlayers)
 
