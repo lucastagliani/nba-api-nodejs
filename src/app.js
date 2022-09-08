@@ -11,6 +11,7 @@ const app = express()
 const port = process.env.PORT || 8080
 
 app.get('/', (req, res) => {
+  console.log('Hi!')
   res.send('Hello World!')
 })
 
@@ -26,6 +27,7 @@ app.get('/players', (req, res) => {
 })
 
 app.get('/questions', (req, res) => {
+  console.log('You are getting a question!')
   const question = getQuestion()
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'GET')
