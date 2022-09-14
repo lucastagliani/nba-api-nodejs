@@ -5,9 +5,15 @@ module.exports = {
     jest: true,
   },
   extends: ['airbnb-base'],
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',
+    babelOptions: {
+      plugins: [
+        '@babel/plugin-syntax-import-assertions',
+      ],
+    },
   },
   rules: {
     semi: ['error', 'never'],

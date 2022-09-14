@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import playersOriginalDataSet from './static-data/playerindex-original-data.json'
+import playersOriginalDataSet from './static-data/playerindex-original-data.json' assert {type: 'json'}
 
 const getMappedPlayers = () => {
   const { rowSet } = playersOriginalDataSet.resultSets[0]

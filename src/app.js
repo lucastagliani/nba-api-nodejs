@@ -11,8 +11,7 @@ const app = express()
 const port = process.env.PORT || 8080
 
 app.get('/', (req, res) => {
-  console.log('Hi!')
-  res.send('Hello World! v2')
+  res.send('Hello World! v3')
 })
 
 app.get('/teams', cache(), async (req, res) => {
