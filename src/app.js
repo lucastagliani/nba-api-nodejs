@@ -12,7 +12,7 @@ const port = process.env.PORT || 8080
 
 app.get('/', (req, res) => {
   console.log('Hi!')
-  res.send('Hello World!')
+  res.send('Hello World! v2')
 })
 
 app.get('/teams', cache(), async (req, res) => {
