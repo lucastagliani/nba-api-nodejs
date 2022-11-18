@@ -14,8 +14,20 @@ const defineRightAnswerRandomly = (players) => {
   return players[randomIndex]
 }
 
-export const getQuestion = () => {
-  const eligiblePlayers = getPlayers({ isActive: true, minPointsReboundsOrAssists: 15 })
+const playerFiltersByLevel = {
+  easy: { isActive: true, minPointsReboundsOrAssists: 20 },
+  regular: { isActive: true, minPointsReboundsOrAssists: 15 },
+  hard: { minPointsReboundsOrAssists: 10 },
+  impossible: {},
+}
+
+const getFilterByLevel = (level) => {
+  const key = level || 'regular'
+  return playerFiltersByLevel[key.toLowerCase()]
+}
+
+export const getQuestion = (level) => {
+  const eligiblePlayers = getPlayers(getFilterByLevel(level))
 
   const alternativePlayers = getRandomPlayers(eligiblePlayers)
 

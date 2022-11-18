@@ -26,8 +26,8 @@ app.get('/players', (req, res) => {
 })
 
 app.get('/questions', (req, res) => {
-  console.log('You are getting a question!')
-  const question = getQuestion()
+  const { level } = req?.query || {}
+  const question = getQuestion(level)
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Methods', 'GET')
   res.json(question)

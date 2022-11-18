@@ -1,5 +1,5 @@
 import axios from 'axios'
-import staticTeams from './static-data/teams.json' assert {type: 'json'}
+import staticTeams from './static-data/teams.json'
 import { features } from '../../constants.js'
 
 export const getTeams = async () => {

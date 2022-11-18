@@ -1,6 +1,7 @@
 import { getQuestion } from './question-service'
+import * as playerService from '../players/player-service'
 
-jest.mock('../players/player-service.js')
+const getPlayersSpy = jest.spyOn(playerService, 'getPlayers')
 
 describe('question-service', () => {
   describe('getQuestion', () => {
@@ -23,6 +24,11 @@ describe('question-service', () => {
       expect(actualQuestion.alternativeOptions.map((a) => a.key)).toEqual(
         expect.arrayContaining([actualQuestion.correctAnswerKey]),
       )
+    })
+
+    it('should call getPlayers with regular level parameters', () => {
+      getQuestion()
+      expect(getPlayersSpy).toBeCalledWith({ isActive: true, minPointsReboundsOrAssists: 15 })
     })
   })
 })

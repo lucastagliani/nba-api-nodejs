@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import playersOriginalDataSet from './static-data/playerindex-original-data.json' assert {type: 'json'}
+import playersOriginalDataSet from './static-data/playerindex-original-data.json'
 
 const getMappedPlayers = () => {
   const { rowSet } = playersOriginalDataSet.resultSets[0]
@@ -45,7 +45,7 @@ const getMappedPlayers = () => {
 const getFilteredPlayers = (players, {
   name, minPoints, minRebounds, minAssists, isActive, minPointsReboundsOrAssists,
 }) => {
-  let filteredPlayers = players
+  let filteredPlayers = [...players]
 
   if (isActive) {
     filteredPlayers = filteredPlayers.filter((player) => player.isActive === !!isActive)

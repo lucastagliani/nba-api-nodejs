@@ -46,7 +46,7 @@ describe('players service', () => {
 
   it('should filter active players', () => {
     const actualPlayers = getPlayers({ isActive: true })
-    expect(actualPlayers.length).toEqual(583)
+    expect(actualPlayers.length).toEqual(503)
   })
 
   it('should filter players by name that exists in fullName considering case insensitive', () => {
@@ -57,21 +57,21 @@ describe('players service', () => {
 
   it('should filter players by minimum points', () => {
     const actualPlayers = getPlayers({ minPoints: 10 })
-    expect(actualPlayers.length).toEqual(851)
+    expect(actualPlayers.length).toEqual(860)
   })
 
   it('should filter players by minimum rebounds', () => {
     const actualPlayers = getPlayers({ minRebounds: 8 })
-    expect(actualPlayers.length).toEqual(174)
+    expect(actualPlayers.length).toEqual(177)
   })
 
   it('should filter players by minimum assists', () => {
     const actualPlayers = getPlayers({ minAssists: 6 })
-    expect(actualPlayers.length).toEqual(78)
+    expect(actualPlayers.length).toEqual(85)
   })
 
   it('should filter active players by minimum value on at least one stat', () => {
     const actualPlayers = getPlayers({ isActive: true, minPointsReboundsOrAssists: 10 })
-    expect(actualPlayers.length).toEqual(186)
+    expect(actualPlayers.length).toEqual(167)
   })
 })
