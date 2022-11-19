@@ -3,6 +3,7 @@ import { getPlayers } from './player-service.js'
 describe('players service', () => {
   const expectedPlayersFormat = [
     {
+      score: 61,
       personId: 2544,
       lastName: 'James',
       firstName: 'LeBron',
