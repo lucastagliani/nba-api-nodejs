@@ -24,12 +24,12 @@ describe('players service', () => {
       draftRound: 1,
       draftNumber: 1,
       rosterStatus: 1.0,
-      points: 27.400,
-      rebounds: 6.800,
-      assists: 6.500,
+      points: 24.900,
+      rebounds: 8.800,
+      assists: 6.900,
       statusTimeframe: 'Season',
       fromYear: '2003',
-      toYear: '2021',
+      toYear: '2022',
       isActive: true,
       imageLinks: {
         small: 'https://cdn.nba.com/headshots/nba/latest/260x190/2544.png',
@@ -41,7 +41,7 @@ describe('players service', () => {
   it('should get all players', () => {
     const actualPlayers = getPlayers()
     expect(actualPlayers).toEqual(expect.arrayContaining(expectedPlayersFormat))
-    expect(actualPlayers.length).toEqual(4713)
+    expect(actualPlayers.length).toEqual(4806)
   })
 
   it('should filter active players', () => {
