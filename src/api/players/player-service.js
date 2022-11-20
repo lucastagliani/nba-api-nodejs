@@ -17,10 +17,8 @@ const calculatesPlayerFamousScore = ({
   return _.round(_.sum([points, reboundsScore, assistsScore, draftRoundScore, draftNumberScore]), 1)
 }
 
-const getHighestYear = (rowSet) => {
-  rowSet
-    .reduce((acc, row) => (acc > parseInt(row[25], 10) ? acc : parseInt(row[25], 10)), 0)
-}
+const getHighestYear = (rowSet) => rowSet
+  .reduce((acc, row) => (acc > parseInt(row[25], 10) ? acc : parseInt(row[25], 10)), 0)
 
 const getMappedPlayers = () => {
   const { rowSet } = playersOriginalDataSet.resultSets[0]
@@ -34,7 +32,7 @@ const getMappedPlayers = () => {
       const draftNumber = player[18]
 
       const scoreParameters = {
-        points, rebounds, assists, draftRound, draftNumber, fullName: `${player[2]} ${player[1]}`,
+        points, rebounds, assists, draftRound, draftNumber,
       }
 
       return {
@@ -75,54 +73,33 @@ const getMappedPlayers = () => {
     })
 }
 
-const getFilteredPlayers = (players, {
-  name,
-  minPoints,
-  minRebounds,
-  minAssists,
-  isActive,
-  minPointsReboundsOrAssists,
-  score,
-  minLastYear,
-}) => {
+const getFilteredPlayers = (players, filterOptions) => {
   let filteredPlayers = [...players]
 
-  if (isActive) {
-    filteredPlayers = filteredPlayers.filter((player) => player.isActive === !!isActive)
-  }
+  const filters = Object.entries(filterOptions)
 
-  if (name) {
-    const nameInLowerCase = name.toLowerCase()
-    filteredPlayers = filteredPlayers
-      .filter((player) => player.fullName.toLowerCase().includes(nameInLowerCase))
-  }
+  filters.forEach(([key, value]) => {
+    if (key.startsWith('min_')) {
+      const cleanKey = key.substring(4)
+      const cleanValue = parseFloat(value)
+      filteredPlayers = filteredPlayers.filter((p) => parseFloat(p[cleanKey]) >= cleanValue)
+      return
+    }
+    if (key.startsWith('max_')) {
+      const cleanKey = key.substring(4)
+      const cleanValue = parseFloat(value)
+      filteredPlayers = filteredPlayers.filter((p) => parseFloat(p[cleanKey]) <= cleanValue)
+      return
+    }
+    if (key === 'name') {
+      const nameInLowerCase = value.toLowerCase()
+      filteredPlayers = filteredPlayers
+        .filter((player) => player.fullName.toLowerCase().includes(nameInLowerCase))
+      return
+    }
 
-  if (minPointsReboundsOrAssists) {
-    filteredPlayers = filteredPlayers.filter((player) => player.points >= minPointsReboundsOrAssists
-      || player.rebounds >= minPointsReboundsOrAssists
-      || player.assists >= minPointsReboundsOrAssists)
-  }
-
-  if (minPoints) {
-    filteredPlayers = filteredPlayers.filter((player) => player.points >= minPoints)
-  }
-
-  if (minRebounds) {
-    filteredPlayers = filteredPlayers.filter((player) => player.rebounds >= minRebounds)
-  }
-
-  if (minAssists) {
-    filteredPlayers = filteredPlayers.filter((player) => player.assists >= minAssists)
-  }
-
-  if (score) {
-    filteredPlayers = filteredPlayers.filter((player) => player.score >= score)
-  }
-
-  if (minLastYear) {
-    filteredPlayers = filteredPlayers
-      .filter((player) => Number(player.lastYear) >= Number(minLastYear))
-  }
+    filteredPlayers = filteredPlayers.filter((player) => player[key] === value)
+  })
 
   return filteredPlayers
 }
