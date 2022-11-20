@@ -17,10 +17,14 @@ const calculatesPlayerFamousScore = ({
   return _.round(_.sum([points, reboundsScore, assistsScore, draftRoundScore, draftNumberScore]), 1)
 }
 
+const getHighestYear = (rowSet) => {
+  rowSet
+    .reduce((acc, row) => (acc > parseInt(row[25], 10) ? acc : parseInt(row[25], 10)), 0)
+}
+
 const getMappedPlayers = () => {
   const { rowSet } = playersOriginalDataSet.resultSets[0]
-  const highestYear = rowSet
-    .reduce((acc, row) => (acc > parseInt(row[25], 10) ? acc : parseInt(row[25], 10)), 0)
+  const highestYear = getHighestYear(rowSet)
   return rowSet
     .map((player) => {
       const points = player[20]
@@ -60,8 +64,8 @@ const getMappedPlayers = () => {
         rebounds,
         assists,
         statusTimeframe: player[23],
-        fromYear: player[24],
-        toYear: player[25],
+        firstYear: player[24],
+        lastYear: player[25],
         isActive: player[25] === highestYear.toString(),
         imageLinks: {
           small: `https://cdn.nba.com/headshots/nba/latest/260x190/${player[0]}.png`,
@@ -72,7 +76,14 @@ const getMappedPlayers = () => {
 }
 
 const getFilteredPlayers = (players, {
-  name, minPoints, minRebounds, minAssists, isActive, minPointsReboundsOrAssists, score,
+  name,
+  minPoints,
+  minRebounds,
+  minAssists,
+  isActive,
+  minPointsReboundsOrAssists,
+  score,
+  minLastYear,
 }) => {
   let filteredPlayers = [...players]
 
@@ -106,6 +117,11 @@ const getFilteredPlayers = (players, {
 
   if (score) {
     filteredPlayers = filteredPlayers.filter((player) => player.score >= score)
+  }
+
+  if (minLastYear) {
+    filteredPlayers = filteredPlayers
+      .filter((player) => Number(player.lastYear) >= Number(minLastYear))
   }
 
   return filteredPlayers
