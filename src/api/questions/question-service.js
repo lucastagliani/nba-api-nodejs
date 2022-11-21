@@ -15,15 +15,15 @@ const defineRightAnswerRandomly = (players) => {
 }
 
 const playerFiltersByLevel = {
-  easy: { isActive: true, minPointsReboundsOrAssists: 20 },
-  regular: { isActive: true, minPointsReboundsOrAssists: 15 },
-  hard: { minPointsReboundsOrAssists: 10 },
+  easy: { isActive: true, min_score: 50 },
+  regular: { min_lastYear: 1995, min_score: 40 },
+  hard: { min_score: 20, min_lastYear: 1990 },
   impossible: {},
 }
 
 const getFilterByLevel = (level) => {
   const key = level || 'regular'
-  return playerFiltersByLevel[key.toLowerCase()]
+  return playerFiltersByLevel[key.toLowerCase()] ?? playerFiltersByLevel.regular
 }
 
 export const getQuestion = (level) => {
