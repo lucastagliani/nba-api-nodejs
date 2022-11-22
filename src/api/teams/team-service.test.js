@@ -21,17 +21,20 @@ describe('teams service', () => {
     beforeEach(() => {
       jest.spyOn(constants, 'features', 'get').mockReturnValue({ HIT_REAL_API_TEAMS: true })
     })
+
     it('should call /teams/league/sacramento', async () => {
       axios.request.mockImplementation(() => Promise.resolve({ data: staticTeams }))
       await getTeams()
       expect(axios.request).toHaveBeenCalledTimes(1)
     })
+
     it('should return response data with teams prop when fetch is successful', async () => {
       axios.request.mockImplementation(() => Promise.resolve({ data: staticTeams }))
       const result = await getTeams()
       expect(result).toMatchObject(expectedResponseData)
     })
-    xit('should NOT return response data with teams prop when fetch is NOT successful', async () => {
+
+    it.skip('should NOT return response data with teams prop when fetch is NOT successful', async () => {
       axios.request.mockImplementation(() => Promise.reject(new Error()))
       const result = await getTeams()
       expect(result).toMatchObject({})

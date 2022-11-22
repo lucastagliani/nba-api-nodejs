@@ -29,8 +29,8 @@ describe('players service', () => {
       rebounds: 8.800,
       assists: 6.900,
       statusTimeframe: 'Season',
-      fromYear: '2003',
-      toYear: '2022',
+      firstYear: '2003',
+      lastYear: '2022',
       isActive: true,
       imageLinks: {
         small: 'https://cdn.nba.com/headshots/nba/latest/260x190/2544.png',
@@ -57,22 +57,17 @@ describe('players service', () => {
   })
 
   it('should filter players by minimum points', () => {
-    const actualPlayers = getPlayers({ minPoints: 10 })
+    const actualPlayers = getPlayers({ min_points: 10 })
     expect(actualPlayers.length).toEqual(860)
   })
 
   it('should filter players by minimum rebounds', () => {
-    const actualPlayers = getPlayers({ minRebounds: 8 })
+    const actualPlayers = getPlayers({ min_rebounds: 8 })
     expect(actualPlayers.length).toEqual(177)
   })
 
   it('should filter players by minimum assists', () => {
-    const actualPlayers = getPlayers({ minAssists: 6 })
+    const actualPlayers = getPlayers({ min_assists: 6 })
     expect(actualPlayers.length).toEqual(85)
-  })
-
-  it('should filter active players by minimum value on at least one stat', () => {
-    const actualPlayers = getPlayers({ isActive: true, minPointsReboundsOrAssists: 10 })
-    expect(actualPlayers.length).toEqual(167)
   })
 })

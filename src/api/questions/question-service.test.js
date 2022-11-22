@@ -28,7 +28,7 @@ describe('question-service', () => {
 
     it('should call getPlayers with regular level parameters', () => {
       getQuestion()
-      expect(getPlayersSpy).toBeCalledWith({ isActive: true, minPointsReboundsOrAssists: 15 })
+      expect(getPlayersSpy).toBeCalledWith({ min_lastYear: 1995, min_score: 40 })
     })
   })
 })
