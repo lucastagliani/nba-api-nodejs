@@ -18,7 +18,7 @@ const playerFiltersByLevel = {
   easy: { isActive: true, min_score: 50 },
   regular: { min_lastYear: 1995, min_score: 40 },
   hard: { min_score: 20, min_lastYear: 1990 },
-  impossible: {},
+  impossible: { min_lastYear: 1968 },
 }
 
 const getFilterByLevel = (level) => {
