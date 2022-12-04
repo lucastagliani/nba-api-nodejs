@@ -15,17 +15,20 @@ app.get('/', (req, res) => {
 })
 
 app.get('/teams', cache(), async (req, res) => {
+  console.log('Request made to /teams')
   const teams = await getTeams()
   res.json(teams)
 })
 
 app.get('/players', (req, res) => {
+  console.log('Request made to /players')
   const filters = req.query
   const players = getPlayers(filters)
   res.json(players)
 })
 
 app.get('/questions', (req, res) => {
+  console.log('Request made to /questions')
   const { level } = req?.query || {}
   const question = getQuestion(level)
   res.header('Access-Control-Allow-Origin', '*')
