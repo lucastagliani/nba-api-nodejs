@@ -24,6 +24,8 @@ app.get('/players', (req, res) => {
   console.log('Request made to /players')
   const filters = req.query
   const players = getPlayers(filters)
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET')
   res.json(players)
 })
 
