@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import playersOriginalDataSet from './static-data/playerindex-original-data.json' assert {type: 'json'}
+import playersOriginalDataSet from './static-data/playerindex-original-data.json' with { type: 'json' }
 
 const draftScoreMap = {
   1: 5,
